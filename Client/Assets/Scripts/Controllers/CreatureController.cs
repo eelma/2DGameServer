@@ -36,14 +36,13 @@ public class CreatureController : MonoBehaviour
         set
         {
             if (_dir == value)
-            {
-
                 return;
-            }
+          
             
             _dir = value;
             if (value != MoveDir.None)
                 _lastDir = value;
+
             UpdateAnimation();
         }
     }
@@ -181,7 +180,7 @@ public class CreatureController : MonoBehaviour
             }
             if (Managers.Map.CanGo(destPos))
             {
-                if(Managers.Object.Find(destPos))
+                if(Managers.Object.Find(destPos)==null)
                 {
                     CellPos = destPos;
                     State = CreatureState.Moving;
