@@ -5,9 +5,7 @@ using UnityEngine;
 public class ObjectManager
 {
 
-    //Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
     List<GameObject> _objects = new List<GameObject>();
-
     public void Add(GameObject go)
     {
         _objects.Add(go);
@@ -16,10 +14,12 @@ public class ObjectManager
     {
         _objects.Remove(go);
     }
+
     public GameObject Find(Vector3Int cellPos)
     {
         foreach(GameObject obj in _objects)
         {
+
             CreatureController cc = obj.GetComponent<CreatureController>();
             if (cc == null)
                 continue;
@@ -28,9 +28,10 @@ public class ObjectManager
                 return obj;
 
         }
+
         return null;
     }
-    public void Clear()
+    public void Clear(GameObject go)
     {
         _objects.Clear();
     }
