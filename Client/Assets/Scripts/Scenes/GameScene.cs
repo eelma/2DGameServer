@@ -9,17 +9,19 @@ public class GameScene : BaseScene
         base.Init();
 
         SceneType = Define.Scene.Game;
-        Managers.Map.LoadMap(1);//1번 맵을 불러주세요
+
+        Managers.Map.LoadMap(1);
 
         GameObject player = Managers.Resource.Instantiate("Creature/Player");
         player.name = "Player";
         Managers.Object.Add(player);
-        for(int i =0; i<5; i++)
-        {
-            GameObject monster = Managers.Resource.Instantiate("Creature/Monster");
+
+        for (int i = 0; i < 5; i++)
+		{
+			GameObject monster = Managers.Resource.Instantiate("Creature/Monster");
             monster.name = $"Monster_{i + 1}";
 
-            //랜덤 위치 스폰(일단 겹쳐도 ok)
+            // 랜덤 위치 스폰 (일단 겹쳐도 OK)
             Vector3Int pos = new Vector3Int()
             {
                 x = Random.Range(-20, 20),
@@ -29,8 +31,9 @@ public class GameScene : BaseScene
             MonsterController mc = monster.GetComponent<MonsterController>();
             mc.CellPos = pos;
 
-            Managers.Object.Add(monster);
-        }
+			Managers.Object.Add(monster);
+		}
+
         //Managers.UI.ShowSceneUI<UI_Inven>();
         //Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
         //gameObject.GetOrAddComponent<CursorController>();
