@@ -35,7 +35,7 @@ public class ObjectManager
     {
 		foreach (GameObject obj in _objects)
 		{
-			
+			 
 			if (condition.Invoke(obj))//컨디션을 받아서 invoke해서 경과가 true면 외부에서 입력해준 조건에 부합하는 객체
 				return obj;
 		}

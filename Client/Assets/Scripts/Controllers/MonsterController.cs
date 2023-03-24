@@ -7,10 +7,13 @@ public class MonsterController : CreatureController
 {
 	Coroutine _coPatrol;
 	Coroutine _coSearch;
+	[SerializeField]
 	Vector3Int _destCellPos;
 
+	[SerializeField]
 	GameObject _target;
 
+	[SerializeField]
 	float _searchRange = 5.0f;
 
 	public override CreatureState State
@@ -42,7 +45,9 @@ public class MonsterController : CreatureController
 		base.Init();
 
 		State = CreatureState.Idle;
-		Dir = MoveDir.None;	
+		Dir = MoveDir.None;
+
+		_speed = 3.0f;
 	}
 
 	protected override void UpdateIdle()
@@ -55,7 +60,7 @@ public class MonsterController : CreatureController
 		}
 		if (_coSearch == null)
 		{
-			_coSearch = StartCoroutine("CoSerch");
+			_coSearch = StartCoroutine("CoSearch");
 		}
 
 	}
@@ -69,11 +74,15 @@ public class MonsterController : CreatureController
 			destPos = _target.GetComponent<CreatureController>().CellPos;
         }
 		List<Vector3Int>path = Managers.Map.FindPath(CellPos, destPos, ignoreDestCollision:true);//현재 위치, 가고싶은 위치
-		if(path.Count<2)
-        {
-
+		if(path.Count<2||(_target != null &&path.Count>10))//path.Count>10는 멀어졌다
+		{//1=제자리 2 = 길을 못찾았다
+			_target = null;
+			State = CreatureState.Idle;
+			return;
         }
-		Vector3Int moveCellDir = _destCellPos - CellPos;
+		Vector3Int nextPos = path[1];
+
+		Vector3Int moveCellDir = nextPos - CellPos;
 		// TODO : Astar
 		if (moveCellDir.x > 0)
 			Dir = MoveDir.Right;
@@ -86,27 +95,9 @@ public class MonsterController : CreatureController
 		else
 			Dir = MoveDir.None;
 
-		Vector3Int destPos = CellPos;
-
-		switch (_dir)
+		if (Managers.Map.CanGo(nextPos) && Managers.Object.Find(nextPos) == null)
 		{
-			case MoveDir.Up:
-				destPos += Vector3Int.up;
-				break;
-			case MoveDir.Down:
-				destPos += Vector3Int.down;
-				break;
-			case MoveDir.Left:
-				destPos += Vector3Int.left;
-				break;
-			case MoveDir.Right:
-				destPos += Vector3Int.right;
-				break;
-		}
-
-		if (Managers.Map.CanGo(destPos) && Managers.Object.Find(destPos) == null)
-		{
-			CellPos = destPos;
+			CellPos = nextPos;
 		}
 		else
 		{
