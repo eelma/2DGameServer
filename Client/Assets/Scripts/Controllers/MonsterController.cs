@@ -62,6 +62,17 @@ public class MonsterController : CreatureController
 
 	protected override void MoveToNextPos()
 	{
+
+		Vector3Int destPos = _destCellPos;
+		if(_target!=null)
+        {
+			destPos = _target.GetComponent<CreatureController>().CellPos;
+        }
+		List<Vector3Int>path = Managers.Map.FindPath(CellPos, destPos, ignoreDestCollision:true);//현재 위치, 가고싶은 위치
+		if(path.Count<2)
+        {
+
+        }
 		Vector3Int moveCellDir = _destCellPos - CellPos;
 		// TODO : Astar
 		if (moveCellDir.x > 0)
@@ -145,7 +156,19 @@ public class MonsterController : CreatureController
 			if (_target != null)
 				continue;
 
+			_target = Managers.Object.Find((go)=>
+			{
+				//플레이어만 체크
+				PlayerController pc = go.GetComponent<PlayerController>();
+				if (pc == null)
+					return false;
 
+				Vector3Int dir = (pc.CellPos - CellPos);
+				if (dir.magnitude > _searchRange)
+					return false;
+
+				return true;
+			});
 
         }
     }
