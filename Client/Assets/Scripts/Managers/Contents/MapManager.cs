@@ -167,7 +167,7 @@ public class MapManager
 					if (CanGo(Pos2Cell(next)) == false) // CellPos
 						continue;
 				}
-
+				
 				// 이미 방문한 곳이면 스킵
 				if (closed[next.Y, next.X])
 					continue;
