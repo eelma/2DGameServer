@@ -1,14 +1,14 @@
-﻿using Google.Protobuf.Protocol;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class ArrowController : BaseController
+public class ArrowController : CreatureController
 {
+
 	protected override void Init()
 	{
-		switch (Dir)
+		switch (_lastDir)
 		{
 			case MoveDir.Up:
 				transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -25,6 +25,7 @@ public class ArrowController : BaseController
 		}
 
 		State = CreatureState.Moving;
+		_speed = 15.0f;
 
 		base.Init();
 	}
@@ -32,5 +33,47 @@ public class ArrowController : BaseController
 	protected override void UpdateAnimation()
 	{
 
+	}
+
+	protected override void MoveToNextPos()
+	{
+		Vector3Int destPos = CellPos;
+
+		switch (_dir)
+		{
+			case MoveDir.Up:
+				destPos += Vector3Int.up;
+				break;
+			case MoveDir.Down:
+				destPos += Vector3Int.down;
+				break;
+			case MoveDir.Left:
+				destPos += Vector3Int.left;
+				break;
+			case MoveDir.Right:
+				destPos += Vector3Int.right;
+				break;
+		}
+
+		if (Managers.Map.CanGo(destPos))
+		{
+			GameObject go = Managers.Object.Find(destPos);
+			if (go == null)
+			{
+				CellPos = destPos;
+			}
+			else
+			{
+				CreatureController cc = go.GetComponent<CreatureController>();
+				if (cc != null)
+					cc.OnDamaged();
+
+				Managers.Resource.Destroy(gameObject);
+			}
+		}
+		else
+		{
+			Managers.Resource.Destroy(gameObject);
+		}
 	}
 }
