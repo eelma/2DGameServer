@@ -5,7 +5,7 @@ import ProtoParser
 def main():
 
     arg_parser = argparse.ArgumentParser(description = 'PacketGenerator')
-    arg_parser.add_argument('--path', type=str, default='C:/Users/palmc/source/repos/Server/Common/Protobuf/bin/Protocol.proto', help='proto path')
+    arg_parser.add_argument('--path', type=str, default='C:/Users/kgca418321/Desktop/MMO_Game/2DGameServer/Server/Common/Protobuf/bin/Protocol.proto', help='proto path')
     arg_parser.add_argument('--output', type=str, default='TestPacketHandler', help='output file')
     arg_parser.add_argument('--recv', type=str, default='C_', help='recv convecntion')
     arg_parser.add_argument('--send', type=str, default='S_', help='send convecntion')
