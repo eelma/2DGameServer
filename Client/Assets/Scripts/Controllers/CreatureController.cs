@@ -48,9 +48,8 @@ public class CreatureController : MonoBehaviour
 		}
 	}
 
-
 	public MoveDir GetDirFromVec(Vector3Int dir)
-    {
+	{
 		if (dir.x > 0)
 			return MoveDir.Right;
 		else if (dir.x < 0)
@@ -62,6 +61,7 @@ public class CreatureController : MonoBehaviour
 		else
 			return MoveDir.None;
 	}
+
 	public Vector3Int GetFrontCellPos()
 	{
 		Vector3Int cellPos = CellPos;

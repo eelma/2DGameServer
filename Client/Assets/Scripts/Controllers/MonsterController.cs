@@ -56,7 +56,7 @@ public class MonsterController : CreatureController
 		Dir = MoveDir.None;
 
 		_speed = 3.0f;
-		_rangedSkill = true;//(Random.Range(0, 2) == 0 ? true : false);
+		_rangedSkill = (Random.Range(0, 2) == 0 ? true : false);
 
 		if (_rangedSkill)
 			_skillRange = 10.0f;
@@ -86,13 +86,10 @@ public class MonsterController : CreatureController
 		{
 			destPos = _target.GetComponent<CreatureController>().CellPos;
 
-			//거리 추출
-			//타겟의 위치 - 나의 위치
 			Vector3Int dir = destPos - CellPos;
-			if(dir.magnitude<=_skillRange && (dir.x==0||dir.y==0))
-            {
+			if (dir.magnitude <= _skillRange && (dir.x == 0 || dir.y == 0))
+			{
 				Dir = GetDirFromVec(dir);
-
 				State = CreatureState.Skill;
 
 				if (_rangedSkill)
@@ -101,7 +98,7 @@ public class MonsterController : CreatureController
 					_coSkill = StartCoroutine("CoStartPunch");
 
 				return;
-            }
+			}
 		}
 
 		List<Vector3Int> path = Managers.Map.FindPath(CellPos, destPos, ignoreDestCollision: true);
@@ -116,7 +113,6 @@ public class MonsterController : CreatureController
 		Vector3Int moveCellDir = nextPos - CellPos;
 
 		Dir = GetDirFromVec(moveCellDir);
-		
 
 		if (Managers.Map.CanGo(nextPos) && Managers.Object.Find(nextPos) == null)
 		{
@@ -198,7 +194,7 @@ public class MonsterController : CreatureController
 
 		// 대기 시간
 		yield return new WaitForSeconds(0.5f);
-		State = CreatureState.Idle;
+		State = CreatureState.Moving;
 		_coSkill = null;
 	}
 
