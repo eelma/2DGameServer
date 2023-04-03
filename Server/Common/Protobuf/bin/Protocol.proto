@@ -4,6 +4,8 @@ package Protocol;
 import "Enum.proto";
 import "Struct.proto";
 
+option csharp_namespace="Google.Protobuf.Protocol2";
+
 message C_LOGIN
 {
 
