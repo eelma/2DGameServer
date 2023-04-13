@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\MapEditor.cs" />
+    <Compile Include="Assets\Editor\MultiplayersBuildAndRun.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -262,9 +263,6 @@
     </Reference>
     <Reference Include="Google.Protobuf">
       <HintPath>C:/Users/kgca418321/Desktop/MMO_Game/2DGameServer/Client/Assets/Libs/Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="ServerCore">
-      <HintPath>C:/Users/kgca418321/Desktop/MMO_Game/2DGameServer/Client/Assets/Libs/ServerCore.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers">
       <HintPath>C:/Users/kgca418321/Desktop/MMO_Game/2DGameServer/Client/Assets/Libs/System.Buffers.dll</HintPath>

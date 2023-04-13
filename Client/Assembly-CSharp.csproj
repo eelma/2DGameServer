@@ -87,6 +87,9 @@
     <Compile Include="Assets\Scripts\Packet\ServerSession.cs" />
     <Compile Include="Assets\Scripts\Scenes\BaseScene.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene.cs" />
+    <Compile Include="Assets\Scripts\ServerCore\Connector.cs" />
+    <Compile Include="Assets\Scripts\ServerCore\RecvBuffer.cs" />
+    <Compile Include="Assets\Scripts\ServerCore\Session.cs" />
     <Compile Include="Assets\Scripts\UI\Popup\UI_Popup.cs" />
     <Compile Include="Assets\Scripts\UI\Scene\UI_Scene.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Base.cs" />
@@ -281,9 +284,6 @@
     </Reference>
     <Reference Include="Google.Protobuf">
       <HintPath>C:/Users/kgca418321/Desktop/MMO_Game/2DGameServer/Client/Assets/Libs/Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="ServerCore">
-      <HintPath>C:/Users/kgca418321/Desktop/MMO_Game/2DGameServer/Client/Assets/Libs/ServerCore.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers">
       <HintPath>C:/Users/kgca418321/Desktop/MMO_Game/2DGameServer/Client/Assets/Libs/System.Buffers.dll</HintPath>

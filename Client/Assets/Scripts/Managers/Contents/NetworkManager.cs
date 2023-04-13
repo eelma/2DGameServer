@@ -20,8 +20,8 @@ public class NetworkManager
 		// DNS (Domain Name System)
 		string host = Dns.GetHostName();
 		IPHostEntry ipHost = Dns.GetHostEntry(host);
-		IPAddress ipAddr = IPAddress.Parse("127.0.0.1");
-		IPEndPoint endPoint = new IPEndPoint(ipAddr, 10000);
+		IPAddress ipAddr = ipHost.AddressList[0];
+		IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
 		Connector connector = new Connector();
 
